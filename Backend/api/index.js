@@ -2,8 +2,8 @@ require("dotenv").config();
 const app = require("../src/app");
 const connectToDB = require("../src/config/database");
 
-// Initialize DB connection for serverless function
-connectToDB();
-
-// Export the Express API
-module.exports = app;
+// Export the Express API as a Vercel Serverless Function
+module.exports = async (req, res) => {
+    await connectToDB();
+    return app(req, res);
+};
