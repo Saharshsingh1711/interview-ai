@@ -1,8 +1,7 @@
 const Groq = require("groq-sdk")
 const { z } = require("zod")
 const { zodToJsonSchema } = require("zod-to-json-schema")
-const puppeteerCore = require("puppeteer-core")
-const chromium = require("@sparticuz/chromium")
+const puppeteer = require("puppeteer")
 
 const ai = new Groq({
     apiKey: process.env.GROQ_API_KEY,
@@ -52,15 +51,7 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
 }
 
 async function generatePdfFromHtml(htmlContent) {
-    const executablePath = await chromium.executablePath();
-    const browser = await puppeteerCore.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: executablePath || undefined,
-        headless: chromium.headless,
-        ignoreHTTPSErrors: true,
-    });
-    
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "networkidle0" });
 
