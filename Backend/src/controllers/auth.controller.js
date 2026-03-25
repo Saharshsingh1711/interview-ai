@@ -52,13 +52,13 @@ async function registerUserController(req, res) {
 
     res.status(201).json({
         message: "User registered successfully",
+        token,
         user: {
             id: user._id,
             username: user.username,
             email: user.email
         }
     })
-
 }
 
 
@@ -101,6 +101,7 @@ async function loginUserController(req, res) {
     })
     res.status(200).json({
         message: "User loggedIn successfully.",
+        token,
         user: {
             id: user._id,
             username: user.username,
