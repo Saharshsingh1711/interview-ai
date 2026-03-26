@@ -49,6 +49,47 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
 }
 
+// ── Top Bar ───────────────────────────────────────────────────────────────────
+.top-bar {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 10;
+    
+    @media (max-width: 600px) {
+        top: 1rem;
+        right: 1rem;
+    }
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: rgba(244, 63, 94, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    svg {
+        transition: transform 0.3s;
+    }
+    
+    &:hover svg {
+        transform: translateX(3px);
+    }
+}
+
 // ── Page Header ──────────────────────────────────────────────────────────────
 .page-header {
     text-align: center;
