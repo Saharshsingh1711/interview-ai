@@ -106,4 +106,33 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
 
 }
 
-module.exports = { generateInterviewReport, generateResumePdf }
+const answerEvaluationSchema = z.object({
+    score: z.number().min(0).max(100).describe("A score between 0 and 100 based on how complete and correct the user's answer is compared to the model answer."),
+    feedback: z.string().describe("Constructive feedback for the user explaining why they got this score, and pointing out areas of improvement."),
+    strengths: z.array(z.string()).describe("Key strengths of the user's answer."),
+    weaknesses: z.array(z.string()).describe("Key weaknesses or missing details in the user's answer.")
+})
+
+async function evaluateAnswer({ question, modelAnswer, userAnswer }) {
+    const prompt = `Evaluate the candidate's spoken answer to the following interview question.
+                    
+                    Question: ${question}
+                    Model Answer / Expected Points: ${modelAnswer}
+                    Candidate's Answer: ${userAnswer}
+
+                    Analyze the candidate's answer. Compare it with the model answer. Be constructive yet critical. If the candidate's answer is empty, gibberish, or irrelevant, return a low score and request a clear answer.
+                    
+                    You MUST return ONLY valid JSON matching this schema:
+                    ${JSON.stringify(zodToJsonSchema(answerEvaluationSchema))}
+`
+
+    const response = await ai.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        messages: [{ role: "user", content: prompt }],
+        response_format: { type: "json_object" },
+    })
+
+    return JSON.parse(response.choices[0].message.content)
+}
+
+module.exports = { generateInterviewReport, generateResumePdf, evaluateAnswer }

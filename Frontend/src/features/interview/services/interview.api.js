@@ -65,3 +65,27 @@ export const generateResumePdf = async ({ interviewReportId }) => {
 
     return response.data
 }
+
+/**
+ * @description Service to evaluate a single mock interview question answer.
+ */
+export const evaluateMockAnswer = async ({ question, modelAnswer, userAnswer }) => {
+    const response = await api.post("/api/interview/mock/evaluate", { question, modelAnswer, userAnswer })
+    return response.data
+}
+
+/**
+ * @description Service to save a completed mock interview session.
+ */
+export const saveMockInterview = async ({ interviewReportId, type, answers, overallScore, overallFeedback }) => {
+    const response = await api.post("/api/interview/mock/save", { interviewReportId, type, answers, overallScore, overallFeedback })
+    return response.data
+}
+
+/**
+ * @description Service to retrieve previous mock interview attempts for a specific report.
+ */
+export const getMockInterviewHistory = async (interviewReportId) => {
+    const response = await api.get(`/api/interview/mock/history/${interviewReportId}`)
+    return response.data
+}

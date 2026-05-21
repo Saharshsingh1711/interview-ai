@@ -37,6 +37,25 @@ interviewRouter.get("/", authMiddleware.authUser, interviewController.getAllInte
  */
 interviewRouter.post("/resume/pdf/:interviewReportId", authMiddleware.authUser, interviewController.generateResumePdfController)
 
+/**
+ * @route POST /api/interview/mock/evaluate
+ * @description Evaluate a single mock interview question answer.
+ * @access private
+ */
+interviewRouter.post("/mock/evaluate", authMiddleware.authUser, interviewController.evaluateMockAnswerController)
 
+/**
+ * @route POST /api/interview/mock/save
+ * @description Save a completed mock interview practice session.
+ * @access private
+ */
+interviewRouter.post("/mock/save", authMiddleware.authUser, interviewController.saveMockInterviewController)
+
+/**
+ * @route GET /api/interview/mock/history/:interviewReportId
+ * @description Retrieve all mock interview sessions for a specific report.
+ * @access private
+ */
+interviewRouter.get("/mock/history/:interviewReportId", authMiddleware.authUser, interviewController.getMockInterviewHistoryController)
 
 module.exports = interviewRouter
