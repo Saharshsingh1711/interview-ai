@@ -211,6 +211,46 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
       color: white;
       cursor: pointer;
     }
+
+    .btn-theme-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid $color-border;
+      background: rgba(255, 255, 255, 0.03);
+      color: $color-text-muted;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+
+      svg {
+        display: block;
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover svg {
+        transform: rotate(15deg);
+      }
+
+      &.mobile-theme-toggle {
+        display: none;
+        
+        @media (max-width: 768px) {
+          display: flex;
+        }
+      }
+    }
   }
 
   /* Shared Landing Sections */
@@ -1171,3 +1211,182 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* LIGHT THEME VARIABLES AND OVERRIDES FOR LANDING PAGE */
+:root.light-theme {
+  .landing-container {
+    background-color: #f9fafb;
+    color: #111827;
+
+    .glow-blob {
+      opacity: 0.65;
+      &--1 { background: rgba(168, 85, 247, 0.07); }
+      &--2 { background: rgba(59, 130, 246, 0.05); }
+      &--3 { background: rgba(236, 72, 153, 0.04); }
+    }
+
+    .navbar {
+      background: rgba(249, 250, 251, 0.8);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+      .logo-container .logo-text {
+        color: #111827;
+      }
+
+      .nav-links a {
+        color: #4b5563;
+        &:hover { color: #111827; }
+      }
+
+      .nav-actions .btn-login {
+        color: #111827;
+        border-color: rgba(0, 0, 0, 0.15);
+        &:hover { background: rgba(0, 0, 0, 0.03); }
+      }
+
+      .btn-theme-toggle {
+        border-color: rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.02);
+        color: #4b5563;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.05);
+          color: #111827;
+          border-color: rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+
+    .mobile-drawer {
+      background: #f9fafb;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      .mobile-link { color: #4b5563; }
+      .mobile-actions .btn-mobile-login {
+        color: #111827;
+        border-color: rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .section__header {
+      h2 { color: #111827; }
+      p { color: #4b5563; }
+    }
+
+    .hero-section {
+      .hero-content {
+        h1 { color: #111827; }
+        .hero-desc { color: #4b5563; }
+        .btn-secondary {
+          background: rgba(0, 0, 0, 0.02);
+          border-color: rgba(0, 0, 0, 0.08);
+          color: #111827;
+          &:hover { background: rgba(0, 0, 0, 0.05); }
+        }
+        .hero-trust {
+          p { color: #9ca3af; }
+          .company-logos {
+            opacity: 0.7;
+            span { color: #4b5563; }
+          }
+        }
+      }
+
+      .hero-visual {
+        .visual-dashboard {
+          background: rgba(255, 255, 255, 0.85);
+          border-color: rgba(0, 0, 0, 0.06);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+          
+          .mock-header .mock-title { color: #9ca3af; }
+          .mock-stats .stat-item {
+            background: rgba(0, 0, 0, 0.01);
+            border-color: rgba(0,0,0,0.04);
+            .label { color: #6b7280; }
+            .value-container .value { color: #111827; }
+          }
+        }
+      }
+    }
+
+    .features-grid .feature-card {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(0, 0, 0, 0.06);
+      &:hover {
+        border-color: rgba(168, 85, 247, 0.3);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+      }
+      .feature-icon {
+        background: rgba(168, 85, 247, 0.05);
+        border-color: rgba(168, 85, 247, 0.1);
+      }
+      h3 { color: #111827; }
+      p { color: #4b5563; }
+    }
+
+    .about-section {
+      background: linear-gradient(180deg, transparent 0%, rgba(168,85,247,0.02) 50%, transparent 100%);
+      .about-graphic {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-color: rgba(0, 0, 0, 0.06) !important;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.04) !important;
+        .graphic-node .node-details {
+          h4 { color: #111827; }
+          p { color: #6b7280; }
+        }
+      }
+      .about-content {
+        h2 { color: #111827; }
+        p { color: #4b5563; }
+      }
+    }
+
+    .faq-container {
+      .faq-item {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(0, 0, 0, 0.06);
+        &.active {
+          border-color: rgba(168, 85, 247, 0.2);
+          background: rgba(255, 255, 255, 0.95);
+        }
+        .faq-trigger {
+          color: #4b5563;
+          &:hover { color: #111827; }
+        }
+        .faq-content { color: #6b7280; }
+      }
+    }
+
+    .cta-section .cta-card {
+      background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.05), transparent), rgba(255, 255, 255, 0.8);
+      border-color: rgba(0, 0, 0, 0.06);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.04);
+      h2 { color: #111827; }
+      p { color: #4b5563; }
+    }
+
+    .footer {
+      background: #f3f4f6;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      .footer-brand {
+        .logo .logo-text { color: #111827; }
+        p { color: #6b7280; }
+      }
+      .footer-links {
+        h4 { color: #111827; }
+        ul a {
+          color: #6b7280;
+          &:hover { color: #111827; }
+        }
+      }
+      .footer-bottom {
+        border-top-color: rgba(0, 0, 0, 0.06);
+        p { color: #9ca3af; }
+        .socials a {
+          color: #9ca3af;
+          &:hover { color: #111827; }
+        }
+      }
+    }
+  }
+}
+

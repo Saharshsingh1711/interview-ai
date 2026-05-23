@@ -25,3 +25,103 @@ body,
     background-clip: text;
     color: transparent;
 }
+
+/* Light Theme Variables and Overrides */
+:root.light-theme {
+    body, #root {
+        background-color: #f9fafb !important;
+        color: #111827 !important;
+    }
+
+    main {
+        background-color: #f9fafb;
+        color: #111827;
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+
+            h1 {
+                color: #111827;
+            }
+
+            p {
+                color: #4b5563;
+            }
+        }
+
+        .input-group {
+            label {
+                color: #374151;
+                font-weight: 500;
+            }
+
+            input {
+                background-color: #ffffff;
+                color: #111827;
+                border: 1px solid #e5e7eb;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition: all 0.2s ease;
+
+                &::placeholder {
+                    color: #9ca3af;
+                }
+
+                &:focus {
+                    border-color: #a855f7;
+                    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+                }
+            }
+        }
+    }
+}
+
+/* Global Theme Toggle Button Styles */
+.btn-theme-toggle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    outline: none;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+    
+    svg {
+        transition: transform 0.3s ease;
+    }
+    &:hover svg {
+        transform: rotate(15deg);
+    }
+}
+
+:root.light-theme {
+    .btn-theme-toggle {
+        border-color: rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.02);
+        color: #4b5563;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: #111827;
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+    }
+}
