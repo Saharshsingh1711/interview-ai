@@ -5,9 +5,14 @@ import Protected from "./features/auth/components/Protected";
 import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
 import MockInterview from "./features/interview/pages/MockInterview";
+import LandingPage from "./features/landing/pages/LandingPage";
 
 
 export const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <LandingPage />
+    },
     {
         path: "/login",
         element: <Login />
@@ -17,7 +22,7 @@ export const router = createBrowserRouter([
         element: <Register />
     },
     {
-        path: "/",
+        path: "/dashboard",
         element: <Protected><Home /></Protected>
     },
     {
