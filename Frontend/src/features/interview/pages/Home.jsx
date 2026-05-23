@@ -82,13 +82,13 @@ const Home = () => {
             </div>
 
             {/* Page Header */}
-            <header className='page-header'>
+            <header className='page-header animate-slide-up'>
                 <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
                 <p>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
             </header>
 
             {/* Main Card */}
-            <div className='interview-card'>
+            <div className='interview-card animate-slide-up delay-100'>
                 <div className='interview-card__body'>
 
                     {/* Left Panel - Job Description */}
@@ -212,7 +212,7 @@ const Home = () => {
 
             {/* Recent Reports List */}
             {reports.length > 0 && (
-                <section className='recent-reports'>
+                <section className='recent-reports animate-slide-up delay-200'>
                     <h2>My Recent Interview Plans</h2>
                     <ul className='reports-list'>
                         {reports.map(report => (

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../auth/hooks/useAuth'
 import { useTheme } from '../../../hooks/useTheme'
 import { Button } from '../../../components/ui/button'
+import { HeroSection } from '../../../components/ui/hero-4'
 import '../style/landing.scss'
 
 const LandingPage = () => {
@@ -11,6 +12,40 @@ const LandingPage = () => {
     const navigate = useNavigate()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [activeFaq, setActiveFaq] = useState(null)
+
+    const animatedTexts = [
+        "with AI Study Roadmaps",
+        "through Interactive Mocks",
+        "by scanning Job Skill Gaps",
+        "with Actionable AI Feedback"
+    ];
+    const [textIndex, setTextIndex] = useState(0);
+    const [displayText, setDisplayText] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    React.useEffect(() => {
+        const fullText = animatedTexts[textIndex];
+
+        const handleTyping = () => {
+            if (isDeleting) {
+                setDisplayText((prev) => prev.substring(0, prev.length - 1));
+            } else {
+                setDisplayText((prev) => fullText.substring(0, prev.length + 1));
+            }
+        };
+
+        const typingSpeed = isDeleting ? 75 : 150;
+        const typeInterval = setInterval(handleTyping, typingSpeed);
+
+        if (!isDeleting && displayText === fullText) {
+            setTimeout(() => setIsDeleting(true), 2000);
+        } else if (isDeleting && displayText === "") {
+            setIsDeleting(false);
+            setTextIndex((prev) => (prev + 1) % animatedTexts.length);
+        }
+
+        return () => clearInterval(typeInterval);
+    }, [displayText, isDeleting, textIndex]);
 
     const toggleFaq = (index) => {
         if (activeFaq === index) {
@@ -45,6 +80,23 @@ const LandingPage = () => {
             question: "Is Interview AI free to use?",
             answer: "Currently, Interview AI is in an open beta stage. You can generate unlimited custom interview plans, take mock interviews, and receive complete feedback reports entirely for free!"
         }
+    ]
+    const avatarData = [
+        {
+            src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80",
+            alt: "User A",
+            fallback: "A",
+        },
+        {
+            src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
+            alt: "User B",
+            fallback: "B",
+        },
+        {
+            src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80",
+            alt: "User C",
+            fallback: "C",
+        },
     ]
 
     return (
@@ -177,17 +229,28 @@ const LandingPage = () => {
             <section id="hero" className="section hero-section">
                 <div className="hero-grid">
                     <div className="hero-content">
-                        <div className="hero-tagline">
+                        <div className="hero-tagline animate-slide-up">
                             <span></span> AI Interview Strategies - 100% Personalised
                         </div>
-                        <h1>
-                            Master Your Next Interview with <span className="highlight-text">AI Precision</span>
+                        <h1 className="animate-slide-up delay-75">
+                            Master Your Next Interview <br/>
+                            <span className="relative mt-3 inline-block w-fit">
+                                {/* Dashed border effect */}
+                                <span className="absolute inset-0 -z-10 -m-3">
+                                    <span className="absolute inset-0 border-2 border-dashed border-primary rounded-2xl opacity-60" style={{ borderColor: '#a855f7' }}></span>
+                                </span>
+                                {/* Animated Text */}
+                                <span className="highlight-text min-h-[1.2em] inline-block px-4">
+                                    {displayText}
+                                    <span className="animate-pulse">|</span>
+                                </span>
+                            </span>
                         </h1>
-                        <p className="hero-desc">
+                        <p className="hero-desc animate-slide-up delay-150">
                             Don't walk into your next interview unprepared. Upload any job description and your resume to receive a customized study roadmap, practice mock interviews, and get actionable AI-driven feedback in seconds.
                         </p>
                         
-                        <div className="hero-buttons">
+                        <div className="hero-buttons animate-slide-up delay-200">
                             <Button 
                                 onClick={handleCtaClick} 
                                 className="btn-primary border-none shadow-lg gap-2 text-white font-semibold cursor-pointer"
@@ -207,7 +270,7 @@ const LandingPage = () => {
                             <a href="#features" className="btn-secondary">Explore Features</a>
                         </div>
 
-                        <div className="hero-trust">
+                        <div className="hero-trust animate-slide-up delay-300">
                             <p>Supercharge interviews at top levels</p>
                             <div className="company-logos">
                                 <span>FAANG</span>
@@ -217,7 +280,7 @@ const LandingPage = () => {
                         </div>
                     </div>
 
-                    <div className="hero-visual">
+                    <div className="hero-visual animate-slide-right delay-200">
                         <div className="visual-glow"></div>
                         <div className="visual-dashboard">
                             <div className="mock-header">
@@ -263,14 +326,14 @@ const LandingPage = () => {
 
             {/* Features Section */}
             <section id="features" className="section">
-                <div className="section__header">
+                <div className="section__header animate-slide-up">
                     <span className="badge">Platform Features</span>
                     <h2>Engineered for Job Seekers</h2>
                     <p>Standard templates won't get you hired. Our platform creates a laser-focused prep environment tailored specifically for you.</p>
                 </div>
 
                 <div className="features-grid">
-                    <div className="feature-card">
+                    <div className="feature-card animate-slide-up delay-75">
                         <div className="feature-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         </div>
@@ -278,7 +341,7 @@ const LandingPage = () => {
                         <p>Upload a PDF or Word resume alongside target requirements. Get a visual priority guide indicating exactly what to study.</p>
                     </div>
 
-                    <div className="feature-card">
+                    <div className="feature-card animate-slide-up delay-150">
                         <div className="feature-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                         </div>
@@ -286,7 +349,7 @@ const LandingPage = () => {
                         <p>Practice writing or reciting answers to challenging interview questions custom-generated for the position.</p>
                     </div>
 
-                    <div className="feature-card">
+                    <div className="feature-card animate-slide-up delay-200">
                         <div className="feature-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                         </div>
@@ -294,7 +357,7 @@ const LandingPage = () => {
                         <p>Receive dynamic evaluation metrics. Identify exactly where your vocabulary, experience, or delivery can be polished.</p>
                     </div>
 
-                    <div className="feature-card">
+                    <div className="feature-card animate-slide-up delay-300">
                         <div className="feature-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
                         </div>
@@ -307,7 +370,7 @@ const LandingPage = () => {
             {/* About Section */}
             <section id="about" className="section about-section">
                 <div className="about-grid">
-                    <div className="about-visual">
+                    <div className="about-visual animate-slide-left delay-75">
                         <div className="about-graphic">
                             <div className="graphic-node">
                                 <div className="node-dot">1</div>
@@ -333,7 +396,7 @@ const LandingPage = () => {
                         </div>
                     </div>
 
-                    <div className="about-content">
+                    <div className="about-content animate-slide-right delay-75">
                         <span className="badge-about">About The Platform</span>
                         <h2>Bridging the Gap Between Preparation and Confidence</h2>
                         <p>
@@ -363,7 +426,7 @@ const LandingPage = () => {
 
             {/* FAQ Section */}
             <section id="faq" className="section">
-                <div className="section__header">
+                <div className="section__header animate-slide-up">
                     <span className="badge">Common Questions</span>
                     <h2>Have Questions? We Have Answers</h2>
                     <p>Learn more about how Interview AI works and how it helps you secure your next role.</p>
@@ -371,7 +434,11 @@ const LandingPage = () => {
 
                 <div className="faq-container">
                     {faqs.map((faq, index) => (
-                        <div key={index} className={`faq-item ${activeFaq === index ? 'active' : ''}`}>
+                        <div 
+                            key={index} 
+                            className={`faq-item animate-slide-up ${activeFaq === index ? 'active' : ''}`}
+                            style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                        >
                             <button className="faq-trigger" onClick={() => toggleFaq(index)}>
                                 <span>{faq.question}</span>
                                 <span className="faq-icon">
@@ -388,7 +455,7 @@ const LandingPage = () => {
 
             {/* Final CTA Section */}
             <section className="section cta-section">
-                <div className="cta-card">
+                <div className="cta-card animate-slide-up delay-100">
                     <h2>Ready to Land Your Dream Job?</h2>
                     <p>Join thousands of candidates who used Interview AI to identify skill gaps, master mock sessions, and clear interviews with complete confidence.</p>
                     <div className="cta-buttons">
