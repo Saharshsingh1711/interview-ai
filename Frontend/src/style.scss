@@ -1,10 +1,25 @@
 @use "./style/button.scss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+@tailwind components;
+@tailwind utilities;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+button {
+    border: none !important;
+    outline: none !important;
+    background: none;
+    text-shadow: none !important;
+    font-family: inherit;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 html,

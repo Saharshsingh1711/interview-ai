@@ -4,6 +4,7 @@ import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../../auth/hooks/useAuth.js'
 import { useTheme } from '../../../hooks/useTheme.js'
+import { Button } from '../../../components/ui/button'
 
 const Home = () => {
 
@@ -66,10 +67,18 @@ const Home = () => {
                     )}
                 </button>
 
-                <button onClick={handleLogout} className='logout-btn'>
+                <Button 
+                    onClick={handleLogout} 
+                    variant="destructive"
+                    className="logout-btn gap-2 shadow-sm font-semibold border-none"
+                    style={{
+                        padding: '0.6rem 1.25rem',
+                        height: 'auto',
+                    }}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                     Logout
-                </button>
+                </Button>
             </div>
 
             {/* Page Header */}
@@ -186,12 +195,18 @@ const Home = () => {
                 {/* Card Footer */}
                 <div className='interview-card__footer'>
                     <span className='footer-info'>AI-Powered Strategy Generation &bull; Approx 30s</span>
-                    <button
+                    <Button
                         onClick={handleGenerateReport}
-                        className='generate-btn'>
+                        className='generate-btn border-none shadow-lg gap-2 text-white font-semibold'
+                        style={{
+                            background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+                            padding: '0.875rem 2rem',
+                            height: 'auto',
+                        }}
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" /></svg>
                         Generate My Interview Strategy
-                    </button>
+                    </Button>
                 </div>
             </div>
 

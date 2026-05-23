@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../auth/hooks/useAuth'
 import { useTheme } from '../../../hooks/useTheme'
+import { Button } from '../../../components/ui/button'
 import '../style/landing.scss'
 
 const LandingPage = () => {
@@ -187,13 +188,22 @@ const LandingPage = () => {
                         </p>
                         
                         <div className="hero-buttons">
-                            <button onClick={handleCtaClick} className="btn-primary">
+                            <Button 
+                                onClick={handleCtaClick} 
+                                className="btn-primary border-none shadow-lg gap-2 text-white font-semibold cursor-pointer"
+                                style={{
+                                    background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+                                    padding: '15px 32px',
+                                    height: 'auto',
+                                    borderRadius: '12px',
+                                }}
+                            >
                                 {user ? "Go to Dashboard" : "Start Preparing for Free"}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
-                            </button>
+                            </Button>
                             <a href="#features" className="btn-secondary">Explore Features</a>
                         </div>
 
@@ -382,9 +392,18 @@ const LandingPage = () => {
                     <h2>Ready to Land Your Dream Job?</h2>
                     <p>Join thousands of candidates who used Interview AI to identify skill gaps, master mock sessions, and clear interviews with complete confidence.</p>
                     <div className="cta-buttons">
-                        <button onClick={handleCtaClick} className="btn-cta-main">
+                        <Button 
+                            onClick={handleCtaClick} 
+                            className="btn-cta-main border-none shadow-lg font-bold cursor-pointer text-white"
+                            style={{
+                                background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+                                padding: '16px 36px',
+                                height: 'auto',
+                                borderRadius: '12px',
+                            }}
+                        >
                             {user ? "Go to Dashboard" : "Create My Free Strategy"}
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </section>
