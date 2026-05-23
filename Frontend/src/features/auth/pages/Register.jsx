@@ -31,8 +31,11 @@ const Register = () => {
         return (
             <main className="flex min-h-screen w-full items-center justify-center bg-[#09090b] px-4">
                 <div className="form-container flex flex-col items-center justify-center p-8 space-y-4">
-                    <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     <h1 className="text-base font-medium text-white">Creating account...</h1>
+                    <p className="text-xs text-[#71717a] text-center max-w-[260px] leading-relaxed">
+                        Waking up the server — this may take up to 30s on the first visit.
+                    </p>
                 </div>
             </main>
         )

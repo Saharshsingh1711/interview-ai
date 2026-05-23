@@ -23,6 +23,17 @@ app.get("/", (req, res) => {
     res.json({ status: "ok", message: "Interview AI Backend is running successfully!" });
 });
 
+/* Warmup endpoint — frontend pings this on load to wake up the serverless function */
+app.get("/api/warmup", async (req, res) => {
+    try {
+        const connectToDB = require("./config/database");
+        await connectToDB();
+        res.json({ status: "warm" });
+    } catch (err) {
+        res.status(500).json({ status: "cold", error: err.message });
+    }
+});
+
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 

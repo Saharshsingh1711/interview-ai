@@ -39,9 +39,6 @@ $severity-low:   #10b981;
     width: 100%;
     min-height: 100vh;
     background-color: $bg-page;
-    background-image: 
-        radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.05), transparent 30%),
-        radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.05), transparent 30%);
     color: $text-primary;
     font-family: $font-stack;
     display: flex;

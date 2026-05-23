@@ -37,6 +37,12 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
                         Self Description: ${selfDescription}
                         Job Description: ${jobDescription}
                         
+                        CRITICAL INSTRUCTION FOR RANDOMIZATION:
+                        To ensure a highly varied preparation experience, you MUST select a unique, randomized, and highly diverse set of technical and behavioral questions.
+                        Avoid picking only the standard default, high-level questions for the specified tech stack (e.g. do not just ask general React performance or MERN state management questions every time).
+                        Instead, introduce high diversity and randomly focus on a wide variety of specific, deep sub-topics within the tech stack (e.g. database querying/indexing strategies, custom hooks, memory management, REST vs gRPC, authentication micro-patterns, security headers, caching layers, build optimizations, etc.) and cover random levels of difficulty.
+                        Each report generated must feel completely fresh, unique, and randomly distributed compared to others.
+                        
                         You MUST return ONLY valid JSON matching the following schema:
                         ${JSON.stringify(zodToJsonSchema(interviewReportSchema))}
 `
@@ -45,6 +51,7 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
         model: "llama-3.3-70b-versatile",
         messages: [{ role: "user", content: prompt }],
         response_format: { type: "json_object" },
+        temperature: 1.0, // Set high temperature to maximize output randomness and question variation
     })
 
     return JSON.parse(response.choices[0].message.content)
