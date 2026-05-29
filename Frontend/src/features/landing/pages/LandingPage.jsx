@@ -7,7 +7,7 @@ import { HeroSection } from '../../../components/ui/hero-4'
 import '../style/landing.scss'
 
 const LandingPage = () => {
-    const { user, loading } = useAuth()
+    const { user, initializing } = useAuth()
     const { theme, toggleTheme } = useTheme()
     const navigate = useNavigate()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -146,7 +146,7 @@ const LandingPage = () => {
                         )}
                     </button>
 
-                    {loading ? (
+                    {initializing ? (
                         <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>Loading...</span>
                     ) : user ? (
                         <Link to="/dashboard" className="btn-cta">Go to Dashboard</Link>

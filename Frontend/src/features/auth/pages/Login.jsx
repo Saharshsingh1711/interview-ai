@@ -28,7 +28,7 @@ const Login = () => {
                     <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     <h1 className="text-base font-medium text-white">Logging in...</h1>
                     <p className="text-xs text-[#71717a] text-center max-w-[260px] leading-relaxed">
-                        Waking up the server — this may take up to 30s on the first visit.
+                        Authenticating your credentials, please wait.
                     </p>
                 </div>
             </main>

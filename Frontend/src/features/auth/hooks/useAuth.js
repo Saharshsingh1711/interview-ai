@@ -7,7 +7,7 @@ import { login, register, logout, getMe } from "../services/auth.api";
 export const useAuth = () => {
 
     const context = useContext(AuthContext)
-    const { user, setUser, loading, setLoading } = context
+    const { user, setUser, loading, setLoading, initializing, setInitializing } = context
 
 
     const handleLogin = async ({ email, password }) => {
@@ -49,6 +49,8 @@ export const useAuth = () => {
         }
     }
 
+    // Check for an existing session in the background.
+    // This no longer blocks the UI — it only sets `initializing` to false when done.
     useEffect(() => {
 
         const getAndSetUser = async () => {
@@ -57,7 +59,7 @@ export const useAuth = () => {
                 const data = await getMe()
                 setUser(data.user)
             } catch (err) { } finally {
-                setLoading(false)
+                setInitializing(false)
             }
         }
 
@@ -65,5 +67,5 @@ export const useAuth = () => {
 
     }, [])
 
-    return { user, loading, handleRegister, handleLogin, handleLogout }
+    return { user, loading, initializing, handleRegister, handleLogin, handleLogout }
 }

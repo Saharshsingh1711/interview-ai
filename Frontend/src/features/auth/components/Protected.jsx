@@ -3,10 +3,10 @@ import { Navigate } from "react-router";
 import React from 'react'
 
 const Protected = ({children}) => {
-    const { loading,user } = useAuth()
+    const { initializing, user } = useAuth()
 
 
-    if(loading){
+    if(initializing){
         return (<main><h1>Loading...</h1></main>)
     }
 
