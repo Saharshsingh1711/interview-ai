@@ -278,7 +278,6 @@ const MockInterview = () => {
                     Back to Strategy Report
                 </button>
                 <h1>Mock Interview <span className='highlight'>Practice</span></h1>
-                <div style={{ width: 100 }} />
             </header>
 
             {step === 'select' && (

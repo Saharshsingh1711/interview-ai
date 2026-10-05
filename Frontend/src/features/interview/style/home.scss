@@ -40,23 +40,26 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 3rem 1.5rem;
-    gap: 2.5rem;
+    justify-content: flex-start;
+    padding: 2rem 1.25rem 3.5rem 1.25rem;
+    gap: 2rem;
     overflow-x: hidden;
+
+    @media (max-width: 600px) {
+        padding: 1.25rem 1rem 2.5rem 1rem;
+        gap: 1.5rem;
+    }
 }
 
 // ── Top Bar ───────────────────────────────────────────────────────────────────
 .top-bar {
-    position: absolute;
-    top: 1.5rem;
-    right: 2rem;
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
     z-index: 10;
-    
-    @media (max-width: 600px) {
-        top: 1rem;
-        right: 1rem;
-    }
 }
 
 .logout-btn {
@@ -90,19 +93,22 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
 // ── Page Header ──────────────────────────────────────────────────────────────
 .page-header {
     text-align: center;
+    width: 100%;
+    max-width: 750px;
     animation: float 6s ease-in-out infinite;
 
     h1 {
-        font-size: 3rem;
+        font-size: clamp(1.75rem, 5vw, 2.75rem);
         font-weight: 800;
         letter-spacing: -0.02em;
+        line-height: 1.25;
         margin-bottom: 0.75rem;
         color: $text-primary;
     }
 
     p {
         color: $text-muted;
-        font-size: 1.1rem;
+        font-size: clamp(0.9rem, 2.5vw, 1.05rem);
         max-width: 520px;
         margin: 0 auto;
         line-height: 1.6;
@@ -137,6 +143,7 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
         min-height: 520px;
         @media (max-width: 768px) {
             flex-direction: column;
+            min-height: auto;
         }
     }
 
@@ -147,6 +154,7 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
         padding: 1.25rem 2rem;
         background-color: rgba(0, 0, 0, 0.2);
         border-top: 1px solid $border-color;
+        gap: 1rem;
 
         .footer-info {
             font-size: 0.85rem;
@@ -166,11 +174,16 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             flex-direction: column;
             gap: 1rem;
             align-items: stretch;
             text-align: center;
+            padding: 1.25rem;
+
+            .generate-btn {
+                width: 100%;
+            }
         }
     }
 }
@@ -193,6 +206,10 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
     flex-direction: column;
     gap: 1.25rem;
     padding: 2rem;
+
+    @media (max-width: 768px) {
+        padding: 1.25rem;
+    }
 
     &__header {
         display: flex;
@@ -224,6 +241,7 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
     &__textarea {
         flex: 1;
         width: 100%;
+        min-height: 180px;
         background-color: $bg-input;
         border: 1px solid $border-color;
         border-radius: 0.75rem;
@@ -250,6 +268,7 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
         &--short {
             flex: unset;
             height: 110px;
+            min-height: 110px;
         }
     }
 
@@ -257,9 +276,8 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
         position: relative;
 
         .char-counter {
-            position: absolute;
-            bottom: 3rem;
-            right: 3rem;
+            align-self: flex-end;
+            margin-top: -0.5rem;
             font-size: 0.75rem;
             color: $text-muted;
             background: rgba(0, 0, 0, 0.5);
@@ -481,6 +499,10 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 1rem;
 
+        @media (max-width: 500px) {
+            grid-template-columns: 1fr;
+        }
+
         .report-item{
             background-color: $bg-card;
             backdrop-filter: blur(10px);
@@ -543,8 +565,18 @@ $font-stack:     'Inter', system-ui, -apple-system, sans-serif;
 // ── Page Footer ───────────────────────────────────────────────────────────────
 .page-footer {
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
     margin-top: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 0 1rem;
+
+    span {
+        color: $text-muted;
+    }
 
     a {
         font-size: 0.85rem;

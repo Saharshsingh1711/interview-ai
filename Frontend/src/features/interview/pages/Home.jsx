@@ -22,11 +22,22 @@ const Home = () => {
     const handleGenerateReport = async () => {
         setErrorMessage("")
         const resumeFile = resumeInputRef.current?.files?.[0]
+        
+        if (!jobDescription || !jobDescription.trim()) {
+            setErrorMessage("Please paste the Target Job Description in the required field above.")
+            return
+        }
+
+        if (!resumeFile && (!selfDescription || !selfDescription.trim())) {
+            setErrorMessage("Please provide either an uploaded Resume or a Quick Self-Description.")
+            return
+        }
+
         const result = await generateReport({ jobDescription, selfDescription, resumeFile })
         if (result.success && result.data) {
             navigate(`/interview/${result.data._id}`)
         } else {
-            setErrorMessage(result.error)
+            setErrorMessage(result.error || "Failed to generate report. Please try again.")
         }
     }
 
@@ -187,8 +198,21 @@ const Home = () => {
                 </div>
 
                 {errorMessage && (
-                    <div style={{ padding: '1rem', margin: '0 1.5rem', backgroundColor: '#3a1619', color: '#ff6b6b', borderRadius: '0.5rem', border: '1px solid #7c151e' }}>
-                        <strong>Error:</strong> {errorMessage}
+                    <div style={{ 
+                        padding: '0.875rem 1.25rem', 
+                        margin: '0.75rem 1.25rem', 
+                        backgroundColor: 'rgba(244, 63, 94, 0.1)', 
+                        color: '#f43f5e', 
+                        borderRadius: '0.75rem', 
+                        border: '1px solid rgba(244, 63, 94, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        fontSize: '0.9rem',
+                        fontWeight: 500
+                    }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <span>{errorMessage}</span>
                     </div>
                 )}
 

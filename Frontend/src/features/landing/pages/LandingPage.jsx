@@ -158,7 +158,7 @@ const LandingPage = () => {
                     )}
                 </div>
 
-                <div className="mobile-nav-controls" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className="mobile-nav-controls">
                     <button 
                         onClick={toggleTheme} 
                         className="btn-theme-toggle mobile-theme-toggle"

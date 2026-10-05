@@ -11,27 +11,36 @@ const mockInterviewModel = require("../models/mockInterview.model")
  */
 async function generateInterViewReportController(req, res) {
     try {
-        if (!req.file || !req.file.buffer) {
-            return res.status(400).json({ message: "Resume PDF is required." });
+        let resumeText = ""
+        if (req.file && req.file.buffer) {
+            try {
+                const parsed = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
+                resumeText = parsed.text || ""
+            } catch (pdfErr) {
+                console.warn("Could not parse PDF buffer:", pdfErr)
+            }
         }
 
-        const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
         const { selfDescription, jobDescription } = req.body
 
-        if (!jobDescription) {
-            return res.status(400).json({ message: "Job Description is required." });
+        if (!jobDescription || !jobDescription.trim()) {
+            return res.status(400).json({ message: "Job Description is required. Please paste the target job description in the required field." });
+        }
+
+        if (!resumeText.trim() && (!selfDescription || !selfDescription.trim())) {
+            return res.status(400).json({ message: "Either a Resume PDF or a Quick Self-Description is required to generate a personalized plan." });
         }
 
         const interViewReportByAi = await generateInterviewReport({
-            resume: resumeContent.text,
-            selfDescription,
+            resume: resumeText,
+            selfDescription: selfDescription || "",
             jobDescription
         })
 
         const interviewReport = await interviewReportModel.create({
             user: req.user.id,
-            resume: resumeContent.text,
-            selfDescription,
+            resume: resumeText,
+            selfDescription: selfDescription || "",
             jobDescription,
             ...interViewReportByAi
         })

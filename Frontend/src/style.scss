@@ -68,6 +68,11 @@
     box-sizing: border-box;
 }
 
+img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    max-width: 100%;
+}
+
 button {
     border: none !important;
     outline: none !important;
@@ -78,6 +83,19 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    touch-action: manipulation;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
 }
 
 html,

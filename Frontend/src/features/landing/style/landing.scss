@@ -204,12 +204,25 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
       }
     }
 
+    .mobile-nav-controls {
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
     .mobile-menu-toggle {
       display: none;
       background: none;
       border: none;
       color: white;
       cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
     }
 
     .btn-theme-toggle {
@@ -1038,7 +1051,7 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
     .hero-section {
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
         text-align: center;
       }
       .hero-content {
@@ -1056,6 +1069,17 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
           align-items: center;
         }
       }
+
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        .visual-dashboard {
+          max-width: 540px;
+          width: 100%;
+        }
+      }
     }
 
     .about-section {
@@ -1070,23 +1094,30 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
 @media (max-width: 768px) {
   .landing-container {
     .navbar {
-      padding: 0 20px;
+      padding: 0 16px;
 
       .nav-links, .nav-actions {
-        display: none; /* Can be toggled or wrapped in a mobile drawer */
+        display: none;
+      }
+
+      .mobile-nav-controls {
+        display: flex;
       }
 
       .mobile-menu-toggle {
-        display: block;
+        display: flex;
       }
     }
 
     .section {
-      padding: 80px 20px;
+      padding: 60px 16px;
       &__header {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
         h2 {
-          font-size: 2rem;
+          font-size: clamp(1.75rem, 5vw, 2.25rem);
+        }
+        p {
+          font-size: 0.95rem;
         }
       }
     }
@@ -1094,46 +1125,90 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
     .hero-section {
       padding-top: 100px;
       padding-bottom: 40px;
+      padding-left: 16px;
+      padding-right: 16px;
+
       .hero-content {
         h1 {
-          font-size: 2.6rem;
+          font-size: clamp(2rem, 6vw, 2.75rem);
+          line-height: 1.2;
+
+          .highlight-text {
+            word-break: break-word;
+          }
         }
         .hero-desc {
-          font-size: 1.05rem;
+          font-size: 1rem;
+          line-height: 1.6;
+        }
+        .hero-buttons {
+          gap: 12px;
+        }
+      }
+
+      .hero-visual {
+        .visual-dashboard {
+          padding: 20px 16px;
+          border-radius: 16px;
+
+          .mock-stats {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
         }
       }
     }
 
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
     .about-section {
+      padding: 60px 16px;
+
+      .about-graphic {
+        padding: 24px 16px;
+        .graphic-node {
+          gap: 14px;
+        }
+      }
+
       .about-content {
         text-align: center;
         h2 {
-          font-size: 2rem;
+          font-size: clamp(1.75rem, 5vw, 2.25rem);
         }
         .about-stats {
-          grid-template-columns: 1fr;
-          gap: 30px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+
+          @media (max-width: 520px) {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
         }
       }
     }
 
     .cta-section {
-      padding: 60px 20px;
+      padding: 50px 16px;
       .cta-card {
-        padding: 50px 24px;
+        padding: 40px 20px;
+        border-radius: 18px;
         h2 {
-          font-size: 2rem;
+          font-size: clamp(1.6rem, 5vw, 2.2rem);
         }
         p {
-          font-size: 1rem;
+          font-size: 0.95rem;
         }
       }
     }
 
     .footer {
-      padding: 50px 20px 30px 20px;
+      padding: 40px 16px 24px 16px;
       .footer-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 30px;
       }
       .footer-bottom {
@@ -1143,32 +1218,38 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
       }
     }
 
-    /* Mobile Menu Drawer (When active) */
+    /* Mobile Menu Drawer */
     .mobile-drawer {
       position: fixed;
       top: 70px;
       left: 0;
       right: 0;
       bottom: 0;
+      height: calc(100vh - 70px);
       background: #050505;
       z-index: 99;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-      gap: 30px;
+      padding: 30px 20px 40px 20px;
+      gap: 24px;
       border-top: 1px solid rgba(255,255,255,0.08);
-      animation: slideDown 0.3s ease-out forwards;
+      animation: slideDown 0.25s ease-out forwards;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
 
       .mobile-link {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         color: $color-text-muted;
         text-decoration: none;
         font-weight: 600;
         transition: color 0.2s ease;
+        padding: 8px 16px;
+        border-radius: 8px;
 
         &:hover {
           color: white;
+          background: rgba(255, 255, 255, 0.05);
         }
       }
 
@@ -1176,19 +1257,22 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
         display: flex;
         flex-direction: column;
         width: 100%;
-        gap: 16px;
-        margin-top: 20px;
+        max-width: 320px;
+        gap: 14px;
+        margin-top: auto;
+        padding-top: 20px;
 
         .btn-mobile-login {
           text-align: center;
           color: white;
           text-decoration: none;
-          font-size: 1.1rem;
+          font-size: 1rem;
           font-weight: 600;
           padding: 12px;
           border-radius: 10px;
           border: 1px solid rgba(255, 255, 255, 0.15);
           width: 100%;
+          background: rgba(255, 255, 255, 0.03);
         }
 
         .btn-mobile-cta {
@@ -1196,12 +1280,39 @@ $gradient-glow: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(5, 5, 
           background: $gradient-primary;
           color: white;
           text-decoration: none;
-          font-size: 1.1rem;
+          font-size: 1rem;
           font-weight: 600;
           padding: 12px;
           border-radius: 10px;
           width: 100%;
+          box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-container {
+    .hero-section {
+      .hero-content {
+        .hero-buttons {
+          flex-direction: column;
+          width: 100%;
+
+          .btn-primary, .btn-secondary {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .footer {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
       }
     }
   }
